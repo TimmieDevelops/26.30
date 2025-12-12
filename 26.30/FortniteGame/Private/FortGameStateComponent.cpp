@@ -318,6 +318,32 @@ void FortGameStateComponent::StartNewSafeZonePhase(UFortGameStateComponent_Battl
 	if (NextPhase >= PhaseArray.Num())
 		return;
 
+	float Damage = 1.f;
+	switch (CurrentPhase)
+	{
+	case 4:
+		Damage = 2.f;
+		break;
+	case 5:
+		Damage = 2.f;
+		break;
+	case 6:
+		Damage = 5.f;
+		break;
+	case 7:
+		Damage = 8.f;
+		break;
+	case 8:
+		Damage = 10.f;
+		break;
+	case 9:
+		Damage = 10.f;
+		break;
+	default:
+		Damage = 1.f;
+		break;
+	}
+
 	const float TimeSeconds = UGameplayStatics::GetTimeSeconds(UWorld::GetWorld());
 	const FFortSafeZonePhaseInfo& SafeZonePhaseInfo = PhaseArray[NextPhase];
 
@@ -336,7 +362,11 @@ void FortGameStateComponent::StartNewSafeZonePhase(UFortGameStateComponent_Battl
 
 	SafeZoneIndicator->Radius = PhaseArray[CurrentPhase].Radius;
 
-	SafeZoneIndicator->CurrentDamageInfo = SafeZonePhaseInfo.DamageInfo;
+	/*SafeZoneIndicator->CurrentDamageInfo = SafeZonePhaseInfo.DamageInfo;
+	SafeZoneIndicator->OnRep_CurrentDamageInfo();*/
+
+	SafeZoneIndicator->CurrentDamageInfo.Damage = Damage;
+	SafeZoneIndicator->CurrentDamageInfo.bPercentageBasedDamage = false;
 	SafeZoneIndicator->OnRep_CurrentDamageInfo();
 
 	SafeZoneIndicator->ForceNetUpdate();
