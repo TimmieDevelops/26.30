@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{407bc035-c9df-42ff-8b93-7f7fa61ea3c3}</ProjectGuid>
+    <RootNamespace>My2630</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;MY2630_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;MY2630_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;MY2630_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;MY2630_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalOptions>/bigobj %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\Public\AbilitySystemComponent.h" />
+    <ClInclude Include="Engine\Public\Actor.h" />
+    <ClInclude Include="Engine\Public\GameModeBase.h" />
+    <ClInclude Include="Engine\Public\GameSession.h" />
+    <ClInclude Include="Engine\Public\NetDriver.h" />
+    <ClInclude Include="Engine\Public\PlayerController.h" />
+    <ClInclude Include="Engine\Public\ThreadHeartBeat.h" />
+    <ClInclude Include="Engine\Public\UnrealEngine.h" />
+    <ClInclude Include="Engine\Public\World.h" />
+    <ClInclude Include="FortniteGame\Public\BuildingActor.h" />
+    <ClInclude Include="FortniteGame\Public\BuildingContainer.h" />
+    <ClInclude Include="FortniteGame\Public\FortAbilitySystemComponentAthena.h" />
+    <ClInclude Include="FortniteGame\Public\FortControllerComponent_Aircraft.h" />
+    <ClInclude Include="FortniteGame\Public\FortGameModeAthena.h" />
+    <ClInclude Include="FortniteGame\Public\FortGameStateComponent.h" />
+    <ClInclude Include="FortniteGame\Public\FortInventoryServiceComponent.h" />
+    <ClInclude Include="FortniteGame\Public\FortLootPackage.h" />
+    <ClInclude Include="FortniteGame\Public\FortPlayerController.h" />
+    <ClInclude Include="FortniteGame\Public\FortPlayerPawn.h" />
+    <ClInclude Include="FortniteGame\Public\FortPlayerStateZone.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="includes\memcury.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Replication\Public\Iris.h" />
+    <ClInclude Include="Replication\Public\Legacy.h" />
+    <ClInclude Include="SDK\PropertyFixup.hpp" />
+    <ClInclude Include="SDK\SDK.hpp" />
+    <ClInclude Include="SDK\SDK\Basic.hpp" />
+    <ClInclude Include="SDK\SDK\CoreUObject_classes.hpp" />
+    <ClInclude Include="SDK\SDK\CoreUObject_parameters.hpp" />
+    <ClInclude Include="SDK\SDK\CoreUObject_structs.hpp" />
+    <ClInclude Include="SDK\SDK\Engine_classes.hpp" />
+    <ClInclude Include="SDK\SDK\Engine_parameters.hpp" />
+    <ClInclude Include="SDK\SDK\Engine_structs.hpp" />
+    <ClInclude Include="SDK\SDK\FortniteGame_classes.hpp" />
+    <ClInclude Include="SDK\SDK\FortniteGame_parameters.hpp" />
+    <ClInclude Include="SDK\SDK\FortniteGame_structs.hpp" />
+    <ClInclude Include="SDK\SDK\GameplayAbilities_classes.hpp" />
+    <ClInclude Include="SDK\SDK\GameplayAbilities_parameters.hpp" />
+    <ClInclude Include="SDK\SDK\GameplayAbilities_structs.hpp" />
+    <ClInclude Include="SDK\SDK\IrisCore_classes.hpp" />
+    <ClInclude Include="SDK\SDK\IrisCore_structs.hpp" />
+    <ClInclude Include="SDK\UnrealContainers.hpp" />
+    <ClInclude Include="SDK\UtfN.hpp" />
+    <ClInclude Include="Server\SafeZone.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\Private\AbilitySystemComponent.cpp" />
+    <ClCompile Include="Engine\Private\Actor.cpp" />
+    <ClCompile Include="Engine\Private\GameModeBase.cpp" />
+    <ClCompile Include="Engine\Private\GameSession.cpp" />
+    <ClCompile Include="Engine\Private\NetDriver.cpp" />
+    <ClCompile Include="Engine\Private\PlayerController.cpp" />
+    <ClCompile Include="Engine\Private\ThreadHeartBeat.cpp" />
+    <ClCompile Include="Engine\Private\World.cpp" />
+    <ClCompile Include="Engine\Private\UnrealEngine.cpp" />
+    <ClCompile Include="FortniteGame\Private\BuildingActor.cpp" />
+    <ClCompile Include="FortniteGame\Private\BuildingContainer.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortAbilitySystemComponentAthena.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortControllerComponent_Aircraft.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortGameModeAthena.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortGameStateComponent.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortInventoryServiceComponent.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortLootPackage.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortPlayerController.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortPlayerControllerAthena.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortPlayerPawn.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortPlayerStateZone.cpp" />
+    <ClCompile Include="FortniteGame\Public\FortPlayerControllerAthena.h" />
+    <ClCompile Include="Replication\Private\Iris.cpp" />
+    <ClCompile Include="Replication\Private\Legacy.cpp" />
+    <ClCompile Include="SDK\SDK\Basic.cpp" />
+    <ClCompile Include="SDK\SDK\CoreUObject_functions.cpp" />
+    <ClCompile Include="SDK\SDK\Engine_functions.cpp" />
+    <ClCompile Include="SDK\SDK\FortniteGame_functions.cpp" />
+    <ClCompile Include="SDK\SDK\GameplayAbilities_functions.cpp" />
+    <ClCompile Include="Server\dllmain.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SDK\NameCollisions.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="SDK\GObjects-Dump-WithProperties.txt" />
+    <Text Include="SDK\GObjects-Dump.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
