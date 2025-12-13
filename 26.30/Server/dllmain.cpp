@@ -10,6 +10,7 @@
 #include "../FortniteGame/Public/BuildingContainer.h"
 #include "../FortniteGame/Public/FortPlayerControllerAthena.h"
 #include "../FortniteGame/Public/FortPlayerPawn.h"
+#include "../FortniteGame/Public/FortPlayerControllerZone.h"
 
 #include "../Engine/Public/GameSession.h"
 #include "../Engine/Public/Actor.h"
@@ -74,6 +75,7 @@ static void HookAll()
     BuildingContainer::Get()->Hook();
     FortPlayerControllerAthena::Get()->Hook();
     FortPlayerPawn::Get()->Hook(); // stop being gay compile
+    FortPlayerControllerZone::Get()->Hook();
 
     GameSession::Get()->Hook();
     Actor::Get()->Hook();

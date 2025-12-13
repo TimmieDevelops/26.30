@@ -6610,6 +6610,14 @@ public:
 	bool IsPlayerControlled() const;
 
 public:
+
+	float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+	{
+		static 	float (*TakeDamageOG)(APawn*, float Damage, struct FDamageEvent const& DamageEvent, AController * EventInstigator, AActor * DamageCause) = decltype(TakeDamageOG)(InSDKUtils::GetImageBase() + 0x5E490EC);
+		return TakeDamageOG(this, Damage, DamageEvent, EventInstigator, DamageCauser);
+	}
+
+public:
 	static class UClass* StaticClass()
 	{
 		return StaticClassImpl<"Pawn">();

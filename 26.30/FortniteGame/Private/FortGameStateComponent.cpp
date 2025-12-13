@@ -1,6 +1,9 @@
 #include "../Public/FortGameStateComponent.h"
+#include "../Public/FortPlayerControllerZone.h"
 
 #include "../../Server/SafeZone.h"
+
+inline static FortPlayerControllerZone* ControllerZone = FortPlayerControllerZone::Get();
 
 inline static Utils* Util = Utils::Get();
 
@@ -143,48 +146,59 @@ void FortGameStateComponent::Tick(const UObject* WorldContext)
 		if (PC->Pawn)
 		{
 			bool bInZone = GameStateComponent->IsInCurrentSafeZone(PC->Pawn->K2_GetActorLocation(), false);
+			AFortPlayerStateAthena* PlayerState = PC->PlayerState->Cast<AFortPlayerStateAthena>();
+			AFortPlayerPawnAthena* PlayerPawn = PC->MyFortPawn->Cast<AFortPlayerPawnAthena>();
+
 			//Util->Logger(Info, "Tick", std::format("bInZone={}", bInZone).c_str());
 
 			if (!bInZone) // in storm
 			{
-				static float LastStormDamageTime = 0.f;
-				bool bDoStormDamage = (TimeSeconds - LastStormDamageTime) >= 1.f;
-
-				if (bDoStormDamage)
+				if (!PlayerPawn->bIsInAnyStorm)
 				{
-					float StormDamage = GameStateComponent->SafeZoneIndicator->CurrentDamageInfo.Damage;
-					float NewHealth = PC->MyFortPawn->GetHealth() - StormDamage;
-
-					PC->MyFortPawn->SetHealth(UKismetMathLibrary::max_0(NewHealth, 0.f));
-				}
-
-				if (!PC->MyFortPawn->bIsInAnyStorm)
-				{
-					PC->MyFortPawn->bIsInAnyStorm = true;
-					PC->MyFortPawn->OnRep_IsInAnyStorm();
+					PlayerPawn->bIsInAnyStorm = true;
+					PlayerPawn->OnRep_IsInAnyStorm();
 				}
 
 				if (PC->MyFortPawn->bIsInsideSafeZone)
 				{
-					PC->MyFortPawn->bIsInsideSafeZone = false;
-					PC->MyFortPawn->OnRep_IsInsideSafeZone();
+					PlayerPawn->bIsInsideSafeZone = false;
+					PlayerPawn->OnRep_IsInsideSafeZone();
+				}
+
+				/*static float LastStormDamageTime = 0.f;
+				bool bDoStormDamage = (TimeSeconds - LastStormDamageTime) >= 1.f;
+
+				if (bDoStormDamage && PlayerPawn->GetHealth() > 0.f)
+				{
+					float StormDamage = GameStateComponent->SafeZoneIndicator->CurrentDamageInfo.Damage;
+					float NewHealth = PlayerPawn->GetHealth() - StormDamage;
+					NewHealth = UKismetMathLibrary::max_0(NewHealth, 0.f);
+					PlayerPawn->SetHealth(NewHealth);
+					//Util->Logger(Info, "Tick", std::format("{}", static_cast<bool>(PlayerPawn->bWasDBNOOnDeath)).c_str());
+
+					if (NewHealth <= 0.f)
+					{
+						FFortPlayerDeathReport DeathReport;
+						DeathReport.KillerPlayerState = PC->PlayerState->Cast<AFortPlayerStateAthena>();
+						ControllerZone->ClientOnPawnDied(PC, DeathReport);
+					}
 				}
 
 				if (bDoStormDamage)
-					LastStormDamageTime = TimeSeconds;
+					LastStormDamageTime = TimeSeconds;*/
 			}
 			else
 			{
-				if (PC->MyFortPawn->bIsInAnyStorm)
+				if (PlayerPawn->bIsInAnyStorm)
 				{
-					PC->MyFortPawn->bIsInAnyStorm = false;
-					PC->MyFortPawn->OnRep_IsInAnyStorm();
+					PlayerPawn->bIsInAnyStorm = false;
+					PlayerPawn->OnRep_IsInAnyStorm();
 				}
 
-				if (!PC->MyFortPawn->bIsInsideSafeZone)
+				if (!PlayerPawn->bIsInsideSafeZone)
 				{
-					PC->MyFortPawn->bIsInsideSafeZone = true;
-					PC->MyFortPawn->OnRep_IsInsideSafeZone();
+					PlayerPawn->bIsInsideSafeZone = true;
+					PlayerPawn->OnRep_IsInsideSafeZone();
 				}
 			}
 		}

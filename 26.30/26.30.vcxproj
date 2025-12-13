@@ -157,6 +157,7 @@
     <ClInclude Include="FortniteGame\Public\FortInventoryServiceComponent.h" />
     <ClInclude Include="FortniteGame\Public\FortLootPackage.h" />
     <ClInclude Include="FortniteGame\Public\FortPlayerController.h" />
+    <ClInclude Include="FortniteGame\Public\FortPlayerControllerZone.h" />
     <ClInclude Include="FortniteGame\Public\FortPlayerPawn.h" />
     <ClInclude Include="FortniteGame\Public\FortPlayerStateZone.h" />
     <ClInclude Include="framework.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="FortniteGame\Private\FortLootPackage.cpp" />
     <ClCompile Include="FortniteGame\Private\FortPlayerController.cpp" />
     <ClCompile Include="FortniteGame\Private\FortPlayerControllerAthena.cpp" />
+    <ClCompile Include="FortniteGame\Private\FortPlayerControllerZone.cpp" />
     <ClCompile Include="FortniteGame\Private\FortPlayerPawn.cpp" />
     <ClCompile Include="FortniteGame\Private\FortPlayerStateZone.cpp" />
     <ClCompile Include="FortniteGame\Public\FortPlayerControllerAthena.h" />
