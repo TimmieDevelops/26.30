@@ -135,7 +135,7 @@ void FortGameStateComponent::Tick(const UObject* WorldContext)
 			SetGamePhaseStep(WorldContext, EAthenaGamePhaseStep::StormShrinking);
 			//GameStateComponent->SafeZoneIndicator->OnSafeZoneStateChange(EFortSafeZoneState::Shrinking, false);
 			//StartNewSafeZonePhase(GameStateComponent);
-		}
+		} 
 	}
 
 	for (AFortPlayerControllerAthena* PC : GameMode->AlivePlayers)
@@ -143,7 +143,50 @@ void FortGameStateComponent::Tick(const UObject* WorldContext)
 		if (PC->Pawn)
 		{
 			bool bInZone = GameStateComponent->IsInCurrentSafeZone(PC->Pawn->K2_GetActorLocation(), false);
-			Util->Logger(Info, "Tick", std::format("bInZone={}", bInZone).c_str());
+			//Util->Logger(Info, "Tick", std::format("bInZone={}", bInZone).c_str());
+
+			if (!bInZone) // in storm
+			{
+				static float LastStormDamageTime = 0.f;
+				bool bDoStormDamage = (TimeSeconds - LastStormDamageTime) >= 1.f;
+
+				if (bDoStormDamage)
+				{
+					float StormDamage = GameStateComponent->SafeZoneIndicator->CurrentDamageInfo.Damage;
+					float NewHealth = PC->MyFortPawn->GetHealth() - StormDamage;
+
+					PC->MyFortPawn->SetHealth(UKismetMathLibrary::max_0(NewHealth, 0.f));
+				}
+
+				if (!PC->MyFortPawn->bIsInAnyStorm)
+				{
+					PC->MyFortPawn->bIsInAnyStorm = true;
+					PC->MyFortPawn->OnRep_IsInAnyStorm();
+				}
+
+				if (PC->MyFortPawn->bIsInsideSafeZone)
+				{
+					PC->MyFortPawn->bIsInsideSafeZone = false;
+					PC->MyFortPawn->OnRep_IsInsideSafeZone();
+				}
+
+				if (bDoStormDamage)
+					LastStormDamageTime = TimeSeconds;
+			}
+			else
+			{
+				if (PC->MyFortPawn->bIsInAnyStorm)
+				{
+					PC->MyFortPawn->bIsInAnyStorm = false;
+					PC->MyFortPawn->OnRep_IsInAnyStorm();
+				}
+
+				if (!PC->MyFortPawn->bIsInsideSafeZone)
+				{
+					PC->MyFortPawn->bIsInsideSafeZone = true;
+					PC->MyFortPawn->OnRep_IsInsideSafeZone();
+				}
+			}
 		}
 	}
 }
