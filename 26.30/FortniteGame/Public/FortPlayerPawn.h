@@ -13,4 +13,7 @@ public:
 	static void Hook();
 	static void ServerHandlePickupInfo(AFortPlayerPawn* Pawn, AFortPickup* Pickup, FFortPickupRequestInfo& Params_0);
 	static void ServerSendZiplineState(AFortPlayerPawn* Pawn, FZiplinePawnState State);
+
+	inline static void (*TeleportPlayerPawnOG)(UObject* Context, FFrame& Stack, void* Ret);
+	static void TeleportPlayerPawn(UObject* Context, FFrame& Stack, void* Ret);
 };

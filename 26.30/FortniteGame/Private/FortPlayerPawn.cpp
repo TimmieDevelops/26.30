@@ -10,6 +10,7 @@ void FortPlayerPawn::Hook()
 {
 	Util->HookVTable<APlayerPawn_Athena_C>(572, ServerHandlePickupInfo);
 	Util->HookVTable<APlayerPawn_Athena_C>(0x24B, ServerSendZiplineState);
+	Util->CreateFuncHook<AFortPlayerPawn>("/Script/FortniteGame.FortPlayerPawn", "TeleportPlayerPawn", TeleportPlayerPawn, (void**)&TeleportPlayerPawnOG);
 }
 
 void FortPlayerPawn::ServerHandlePickupInfo(AFortPlayerPawn* Pawn, AFortPickup* Pickup, FFortPickupRequestInfo& Params_0)
@@ -67,4 +68,26 @@ void FortPlayerPawn::ServerSendZiplineState(AFortPlayerPawn* Pawn, FZiplinePawnS
 		Ascender->PawnUsingHandle = PawnUsingHandle;
 		Ascender->OnRep_PawnUsingHandle();
 	}
+}
+
+void FortPlayerPawn::TeleportPlayerPawn(UObject* Context, FFrame& Stack, void* Ret)
+{
+	UObject* WorldContextObject = nullptr;
+	AFortPlayerPawn* PlayerPawn = nullptr;
+	FVector DestLocation;
+	FRotator DestRotation;
+	bool bIgnoreCollision = false;
+	bool bIgnoreSupplementalKillVolumeSweep = false;
+	Stack.StepCompiledIn(&WorldContextObject);
+	Stack.StepCompiledIn(&PlayerPawn);
+	Stack.StepCompiledIn(&DestLocation);
+	Stack.StepCompiledIn(&DestRotation);
+	Stack.StepCompiledIn(&bIgnoreCollision);
+	Stack.StepCompiledIn(&bIgnoreSupplementalKillVolumeSweep);
+	bool bS = false;
+	if (PlayerPawn)
+	{
+		bS = PlayerPawn->K2_TeleportTo(DestLocation, DestRotation);
+	}
+	*static_cast<bool*>(Ret) = true;
 }
