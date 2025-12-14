@@ -9,6 +9,7 @@ inline static Utils* Util = Utils::Get();
 void FortPlayerPawn::Hook()
 {
 	Util->HookVTable<APlayerPawn_Athena_C>(572, ServerHandlePickupInfo);
+	Util->HookVTable<APlayerPawn_Athena_C>(0x24B, ServerSendZiplineState);
 }
 
 void FortPlayerPawn::ServerHandlePickupInfo(AFortPlayerPawn* Pawn, AFortPickup* Pickup, FFortPickupRequestInfo& Params_0)
@@ -38,4 +39,32 @@ void FortPlayerPawn::ServerHandlePickupInfo(AFortPlayerPawn* Pawn, AFortPickup* 
 	Pickup->OnRep_PickupLocationData();
 
 	Pawn->IncomingPickups.Add(Pickup);
+}
+
+void FortPlayerPawn::ServerSendZiplineState(AFortPlayerPawn* Pawn, FZiplinePawnState State)
+{
+	if (!Pawn) 
+	{
+		return;
+	}
+
+	Pawn->ZiplineState = State;
+	auto Zipline = Pawn->GetActiveZipline();
+	((void (*)(AFortPlayerPawn*))(InSDKUtils::GetImageBase() + 0x87D570C))(Pawn);
+	if (State.bJumped) 
+	{
+		auto Velocity = Pawn->CharacterMovement->Velocity;
+		auto VelocityX = Velocity.X * -0.5f;
+		auto VelocityY = Velocity.Y * -0.5f;
+		auto VelocityZ = Velocity.Z * -0.5f;
+		Pawn->LaunchCharacterJump({ VelocityX >= -750 ? fminf(VelocityX, 750) : -750, VelocityY >= -750 ? fminf(VelocityY, 750) : -750, 1200 }, false, false, true, true);
+	}
+	static auto ZipLineClass = Utils::StaticLoadObject<UClass>("/Ascender/Gameplay/Ascender/B_Athena_Zipline_Ascender.B_Athena_Zipline_Ascender_C");
+	if (auto Ascender = Zipline->Cast<AFortAscenderZipline>(ZipLineClass)) 
+	{
+		TWeakObjectPtr<AFortPlayerPawn> PawnUsingHandle{};
+		PawnUsingHandle.ObjectIndex = -1;
+		Ascender->PawnUsingHandle = PawnUsingHandle;
+		Ascender->OnRep_PawnUsingHandle();
+	}
 }

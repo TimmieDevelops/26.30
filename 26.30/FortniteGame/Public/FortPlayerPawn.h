@@ -12,4 +12,5 @@ public:
 public:
 	static void Hook();
 	static void ServerHandlePickupInfo(AFortPlayerPawn* Pawn, AFortPickup* Pickup, FFortPickupRequestInfo& Params_0);
+	static void ServerSendZiplineState(AFortPlayerPawn* Pawn, FZiplinePawnState State);
 };
